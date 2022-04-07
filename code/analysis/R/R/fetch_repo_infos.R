@@ -24,6 +24,7 @@
 #' fetch_repo_infos("ropensci", "lightr")
 #'
 #' @importFrom purrr %>%
+#' @importFrom rlang %||%
 #'
 #' @export
 fetch_repo_infos <- function(owner, repo) {
@@ -66,9 +67,9 @@ fetch_repo_infos <- function(owner, repo) {
   }
 
   return(c(
-    language = req$language,
-    license = req$license$spdx_id,
-    version = last_version,
+    language = req$language %||% NA_character_,
+    license = req$license$spdx_id %||% NA_character_,
+    version = last_version %||% NA_character_,
     has_codemeta = "codemeta.json" %in% files,
     has_citation = "CITATION" %in% files,
     has_zenodo = ".zenodo.json" %in% files
