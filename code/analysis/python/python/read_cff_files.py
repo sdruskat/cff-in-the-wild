@@ -15,9 +15,11 @@ def sanity_check(cff_file: dict) -> bool:
 
 def read_cff_files(datadir: str):
     """Read CFF files from a directory and return a list of valid
-    YAML CFF data and list of invalid YAML filenames"""
+    YAML CFF data, a list of invalid CFF filenames,
+    and a list of invalid YAML filenames"""
     _cff_data = []
-    _invalid_file = []
+    _invalid_yaml = []
+    _invalid_cff = []
     # Loop over all of the files in the directory
     for file in os.listdir(datadir):
         # Check it's a .cff file
@@ -25,20 +27,21 @@ def read_cff_files(datadir: str):
             # Open the file, read the YAML and append to cff_data
             with open(os.path.join(datadir, file)) as f:
                 # Try to parse the YAML, and if we can't, add to the
-                # invalid file list
+                # invalid YAML list
                 try:
                     cff_file = yaml.safe_load(f)
                     if sanity_check(cff_file):
                         _cff_data.append(cff_file)
                     else:
-                        _invalid_file.append(file)
+                        # Invalid CFF, but valid YAML
+                        _invalid_cff.append(file)
                 except:
-                    _invalid_file.append(file)
-    return _cff_data, _invalid_file
+                    _invalid_yaml.append(file)
+    return _cff_data, _invalid_cff, _invalid_yaml
 
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
     parser.add_argument('--datadir', type=str, required=True, help='Directory in which CFF file are stored')
     args = parser.parse_args()
-    cff_data, invalid_file = read_cff_files(args.datadir)
+    cff_data, invalid_cff, invalid_yaml = read_cff_files(args.datadir)
