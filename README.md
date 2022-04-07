@@ -11,8 +11,9 @@ This is an [SSI Collaborations Workshop 2022](https://software.ac.uk/cw22) hack 
 ├─ code/                     
 │  ├─ data-retrieval/        Code/software for data retrieval from GitHub
 ├─ data/                     The data we analyse
-│  ├─ raw/                   Raw data retrieved via the GitHub Search API
-│  │  ├─ <name>/             Directories holding the raw data retrieved by different people
+│  ├─ raw/                   NEVER MAKE THIS PUBLIC! DATA PRIVACY!
+├─ output/
+│  ├─ figures/               Figures for the presentation
 ```
 
 
