@@ -7,16 +7,7 @@ import subprocess
 
 def validate(infile):
     output = subprocess.check_output(['cffconvert', '--validate', '-i', infile])
-    return 'Citation metadata are valid according to schema version' in output
-
-
-def sanity_check(cff_file: dict) -> bool:
-    """Checks if the required keys for CFF exist in the given file.
-
-    :param cff_file: A dictionary containing the metadata from a CFF file
-    :return: whether the required keys for CFF exist in the file
-    """
-    return all(k in cff_file for k in ('cff-version', 'message', 'title', 'authors'))
+    return b'Citation metadata are valid according to schema version' in output
 
 
 def read_cff_files(datadir: str):
