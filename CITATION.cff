@@ -1,0 +1,28 @@
+# This CITATION.cff file was generated with cffinit.
+# Visit https://bit.ly/cffinit to generate yours today!
+
+cff-version: 1.2.0
+title: CFF in the Wild
+message: Please cite this software using these metadata.
+type: software
+authors:
+  - given-names: Amal
+    family-names: Alghamdi
+  - given-names: Hugo
+    family-names: Gruson
+    orcid: 'https://orcid.org/0000-0002-4094-1476'
+  - given-names: Jez
+    family-names: Cope
+  - given-names: Mark
+    family-names: Basham
+    orcid: 'https://orcid.org/0000-0002-8438-1415'
+  - given-names: Sam
+    family-names: Harrison
+    orcid: 'https://orcid.org/0000-0001-8491-4720'
+  - given-names: Stephan
+    family-names: Druskat
+    orcid: 'https://orcid.org/0000-0003-4925-7248'
+repository-code: 'https://github.com/sdruskat/cff-in-the-wild'
+license: Apache-2.0
+version: 0.1.0
+date-released: '2022-04-07'
