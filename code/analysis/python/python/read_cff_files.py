@@ -59,7 +59,8 @@ if __name__ == '__main__':
     cff_data, invalid_cff, invalid_yaml = read_cff_files(args.datadir)
 
     print(f'CFF files: {len(cff_data)}')
-    print(f'Invalid files: {len(invalid_files)}')
+    print(f'Invalid CFF files: {len(invalid_cff)}')
+    print(f'Invalid YAML files: {len(invalid_yaml)}')
 
     # Check how many were created using CFFinit
     cffinit = 0
