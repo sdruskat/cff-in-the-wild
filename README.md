@@ -29,7 +29,7 @@ This project looks at how these files are actually used:
 
 ## Usage
 
-A dataset with some thousand links to repositories containing `CITATION.cff` files are in [`data/cff_repositories`](data/cff_repositories.csv).
+A dataset with some thousand links to repositories containing `CITATION.cff` files are in [`data/cff_repositories.csv`](data/cff_repositories.csv).
 
 Some of the analyses are run in R, some in Python.
 
