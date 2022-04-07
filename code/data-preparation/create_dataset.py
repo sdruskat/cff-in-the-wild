@@ -21,7 +21,7 @@ def run():
             filename = path_in_str.split('/')[-1]
             split = filename.split('_')
             org = split[0]
-            name = split[1]
+            name = '_'.join(split[1:-1])
             of_writer.writerow([org,name])
 
 
