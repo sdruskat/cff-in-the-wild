@@ -2,6 +2,12 @@
 import os
 import yaml
 import argparse
+import subprocess
+
+
+def validate(infile):
+    output = subprocess.check_output(['cffconvert', '--validate', '-i', infile])
+    return 'Citation metadata are valid according to schema version' in output
 
 
 def sanity_check(cff_file: dict) -> bool:
@@ -30,7 +36,7 @@ def read_cff_files(datadir: str):
                 # invalid YAML list
                 try:
                     cff_file = yaml.safe_load(f)
-                    if sanity_check(cff_file):
+                    if validate(datadir + '/' + file):
                         _cff_data.append(cff_file)
                     else:
                         # Invalid CFF, but valid YAML
