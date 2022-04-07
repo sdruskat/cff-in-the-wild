@@ -67,10 +67,9 @@ def main():
     )
     args = parser.parse_args()
 
-    cff_data, invalid_file = read_cff_files(args.datadir)
+    cff_data, _, _ = read_cff_files(args.datadir)
 
     print(f"{len(cff_data)} valid files read")
-    print(f"{len(invalid_file)} invalid files")
     print()
 
     compile_compliance(cff_data)
