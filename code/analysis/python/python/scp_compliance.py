@@ -50,11 +50,19 @@ def compile_compliance(cff_data):
         is_compliant_count += int(is_compliant)
 
     print(f"Sample size:  {sample_size}")
-    print(f"Has version:  {has_version_count}")
-    print(f"Has repo:     {has_code_repo_count}")
-    print(f"Has DOI:      {has_doi_count}")
-    print(f"Has citation: {has_citation_count}")
-    print(f"Compliant:    {is_compliant_count}")
+    print(
+        f"Has version:  {has_version_count} ({100*has_version_count/sample_size:.1f}%)"
+    )
+    print(
+        f"Has repo:     {has_code_repo_count} ({100*has_code_repo_count/sample_size:.1f}%)"
+    )
+    print(f"Has DOI:      {has_doi_count} ({100*has_doi_count/sample_size:.1f}%)")
+    print(
+        f"Has citation: {has_citation_count} ({100*has_citation_count/sample_size:.1f}%)"
+    )
+    print(
+        f"Compliant:    {is_compliant_count} ({100*is_compliant_count/sample_size:.1f}%)"
+    )
 
 
 def main():
