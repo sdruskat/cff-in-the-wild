@@ -2,6 +2,7 @@
 import os
 import yaml
 import argparse
+from calculate_stats import which_cff_version
 
 
 def read_cff_files(datadir):
@@ -50,3 +51,7 @@ if __name__ == '__main__':
         if cff['created_by_cffinit']:
             cffinit = cffinit + 1
     print(f'Files created with CFFinit: {cffinit}')
+
+    # Which CFF versions
+    cff_versions = which_cff_version(cff_data)
+    print('CFF versions: ', cff_versions)
