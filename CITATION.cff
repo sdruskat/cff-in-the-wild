@@ -8,6 +8,7 @@ type: software
 authors:
   - given-names: Amal
     family-names: Alghamdi
+    orcid: https://orcid.org/0000-0003-0145-5296
   - given-names: Hugo
     family-names: Gruson
     orcid: 'https://orcid.org/0000-0002-4094-1476'
