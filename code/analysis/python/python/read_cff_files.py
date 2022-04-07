@@ -33,7 +33,7 @@ def read_cff_files(datadir: str):
                 # invalid YAML list
                 try:
                     cff_file = yaml.safe_load(f)
-                    if validate(datadir + '/' + file):
+                    if validate(os.path.join(datadir, file)):
                         # Was the file created by CFFinit? Relies on this comment
                         # being on the first line
                         if 'This CITATION.cff file was generated with cffinit' in cff_str:
@@ -43,7 +43,7 @@ def read_cff_files(datadir: str):
                         _cff_data.append(cff_file)
                     else:
                         # Invalid CFF, but valid YAML
-                        _invalid_cff.append(file)cff_data.append(cff_file)
+                        _invalid_cff.append(file)
                 except:
                     _invalid_yaml.append(file)
     return _cff_data, _invalid_cff, _invalid_yaml
