@@ -19,7 +19,19 @@ This is an [SSI Collaborations Workshop 2022](https://software.ac.uk/cw22) hack 
 
 ## Introduction
 
-tba
+The [Citation File Format](https://citation-file-format.github.io/) enables you to provide the citation metadata for your software in easy-to-read YAML files. There are now several thousand `CITATION.cff` files on GitHub alone.
+
+This project looks at how these files are actually used: 
+
+- Are they used correctly (i.e., do they conform to the format specifications)?
+- Which versions of the format are used?
+- What context are they used in, with what programming languages, licenses, etc.?
+
+## Usage
+
+A dataset with some thousand links to repositories containing `CITATION.cff` files are in [`data/cff_repositories.csv`](data/cff_repositories.csv).
+
+Some of the analyses are run in R, some in Python.
 
 ## Contributing ✏️
 
@@ -48,3 +60,5 @@ Please [open a GitHub issue](https://github.com/sdruskat/cff-in-the-wild/issues/
 Software code and notebooks from this project are licensed under the open source [Apache License, v2.0](LICENSE) license. Project documentation and images are licensed under CC BY 4.0. Data produced by this project in the data/outputs directory is licensed under CC0. Other data included in this project from other sources remains licensed under its original license.
 
 ## Contributors 💖
+
+See the [`CITATION.cff` file](CITATION.cff) :tada:.
