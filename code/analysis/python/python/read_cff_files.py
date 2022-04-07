@@ -4,11 +4,22 @@ import yaml
 import argparse
 
 
-def read_cff_files(datadir):
+def sanity_check(cff_file: dict) -> bool:
+    """Checks if the required keys for CFF exist in the given file.
+
+    :param cff_file: A dictionary containing the metadata from a CFF file
+    :return: whether the required keys for CFF exist in the file
+    """
+    return all(k in cff_file for k in ('cff-version', 'message', 'title', 'authors'))
+
+
+def read_cff_files(datadir: str):
     """Read CFF files from a directory and return a list of valid
-    YAML CFF data and list of invalid YAML filenames"""
-    cff_data = []
-    invalid_file = []
+    YAML CFF data, a list of invalid CFF filenames,
+    and a list of invalid YAML filenames"""
+    _cff_data = []
+    _invalid_yaml = []
+    _invalid_cff = []
     # Loop over all of the files in the directory
     for file in os.listdir(datadir):
         # Check it's a .cff file
@@ -19,19 +30,25 @@ def read_cff_files(datadir):
                 # saying it was created with CFFinit, if it was
                 cff_str = f.readline()
                 # Try to parse the YAML, and if we can't, add to the
-                # invalid file list
+                # invalid YAML list
                 try:
                     cff_file = yaml.safe_load(f)
-                    # Was the file created by CFFinit? Relies on this comment
-                    # being on the first line
-                    if 'This CITATION.cff file was generated with cffinit' in cff_str:
-                        cff_file['created_by_cffinit'] = True
+                    
+                    if sanity_check(cff_file):
+                        # Was the file created by CFFinit? Relies on this comment
+                        # being on the first line
+                        if 'This CITATION.cff file was generated with cffinit' in cff_str:
+                            cff_file['created_by_cffinit'] = True
+                        else:
+                            cff_file['created_by_cffinit'] = False
+                            
+                        _cff_data.append(cff_file)
                     else:
-                        cff_file['created_by_cffinit'] = False
-                    cff_data.append(cff_file)
+                        # Invalid CFF, but valid YAML
+                        _invalid_cff.append(file)cff_data.append(cff_file)
                 except:
-                    invalid_file.append(file)
-    return cff_data, invalid_file
+                    _invalid_yaml.append(file)
+    return _cff_data, _invalid_cff, _invalid_yaml
 
 
 if __name__ == '__main__':
@@ -39,10 +56,11 @@ if __name__ == '__main__':
     parser.add_argument('--datadir', type=str, required=True, help='Directory in which CFF file are stored')
     args = parser.parse_args()
 
-    # Read the CFF files and print how many are valid YAML
-    cff_data, invalid_files = read_cff_files(args.datadir)
+    cff_data, invalid_cff, invalid_yaml = read_cff_files(args.datadir)
+
     print(f'CFF files: {len(cff_data)}')
-    print(f'Invalid files: {len(invalid_files)}')
+    print(f'Invalid CFF files: {len(invalid_cff)}')
+    print(f'Invalid YAML files: {len(invalid_yaml)}')
 
     # Check how many were created using CFFinit
     cffinit = 0
