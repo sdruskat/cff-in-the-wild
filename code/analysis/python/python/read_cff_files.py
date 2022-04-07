@@ -13,11 +13,11 @@ def sanity_check(cff_file: dict) -> bool:
     return all(k in cff_file for k in ('cff-version', 'message', 'title', 'authors'))
 
 
-def read_cff_files(datadir):
+def read_cff_files(datadir: str):
     """Read CFF files from a directory and return a list of valid
     YAML CFF data and list of invalid YAML filenames"""
-    cff_data = []
-    invalid_file = []
+    _cff_data = []
+    _invalid_file = []
     # Loop over all of the files in the directory
     for file in os.listdir(datadir):
         # Check it's a .cff file
@@ -29,12 +29,12 @@ def read_cff_files(datadir):
                 try:
                     cff_file = yaml.safe_load(f)
                     if sanity_check(cff_file):
-                        cff_data.append(cff_file)
+                        _cff_data.append(cff_file)
                     else:
-                        invalid_file.append(file)
+                        _invalid_file.append(file)
                 except:
-                    invalid_file.append(file)
-    return cff_data, invalid_file
+                    _invalid_file.append(file)
+    return _cff_data, _invalid_file
 
 
 if __name__ == '__main__':
