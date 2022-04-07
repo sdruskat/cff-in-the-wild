@@ -46,7 +46,7 @@ def read_cff_files(datadir: str):
                         _cff_data.append(cff_file)
                     else:
                         # Invalid CFF, but valid YAML
-                        _invalid_cff.append(file)cff_data.append(cff_file)
+                        _invalid_cff.append(file)
                 except:
                     _invalid_yaml.append(file)
     return _cff_data, _invalid_cff, _invalid_yaml
