@@ -1,0 +1,15 @@
+---
+title: 'Like, a blog post, not even a CFF file, d'uh!'
+date: '2021-11-23'
+linkTitle: https://thiskeyisincamelcase.com
+description: |-
+  <p>HTML<br />
+  just HTML<br />
+  </p>
+  <strong>Continue reading</strong>: <a href="https://somewhere.tld">Blog post ...
+disable_comments: true
+---
+<p>HTML<br />
+  just HTML<br />
+  </p>
+  <strong>Continue reading</strong>: <a href="https://somewhere.tld">Blog post ...

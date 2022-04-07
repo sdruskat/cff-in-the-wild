@@ -1,0 +1,6 @@
+some: value
+another: key
+a:
+    - list
+    - of
+    - things
