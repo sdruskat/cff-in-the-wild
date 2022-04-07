@@ -2,16 +2,14 @@
 import os
 import yaml
 import argparse
+import subprocess
+
 from calculate_stats import which_cff_version
 
 
-def sanity_check(cff_file: dict) -> bool:
-    """Checks if the required keys for CFF exist in the given file.
-
-    :param cff_file: A dictionary containing the metadata from a CFF file
-    :return: whether the required keys for CFF exist in the file
-    """
-    return all(k in cff_file for k in ('cff-version', 'message', 'title', 'authors'))
+def validate(infile):
+    output = subprocess.check_output(['cffconvert', '--validate', '-i', infile])
+    return b'Citation metadata are valid according to schema version' in output
 
 
 def read_cff_files(datadir: str):
@@ -30,19 +28,18 @@ def read_cff_files(datadir: str):
                 # Read the first line, which should contain the comment
                 # saying it was created with CFFinit, if it was
                 cff_str = f.readline()
+                f.seek(0)
                 # Try to parse the YAML, and if we can't, add to the
                 # invalid YAML list
                 try:
                     cff_file = yaml.safe_load(f)
-                    
-                    if sanity_check(cff_file):
+                    if validate(os.path.join(datadir, file)):
                         # Was the file created by CFFinit? Relies on this comment
                         # being on the first line
                         if 'This CITATION.cff file was generated with cffinit' in cff_str:
                             cff_file['created_by_cffinit'] = True
                         else:
                             cff_file['created_by_cffinit'] = False
-                            
                         _cff_data.append(cff_file)
                     else:
                         # Invalid CFF, but valid YAML
